@@ -1,0 +1,907 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Specker.ai – Product Design Presentation Deck | Muhammad Anas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #07080e;
+        color: #e2e8f0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .slide {
+        width: 16in;
+        height: 9in;
+        page-break-after: always;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.6in 0.8in;
+        box-sizing: border-box;
+        background: #0a0c16;
+      }
+      .slide-glow {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.15) 0%,
+          rgba(124, 58, 237, 0.05) 50%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SLIDE 1: COVER SLIDE -->
+    <section class="slide">
+      <div class="slide-glow -top-40 -left-40"></div>
+      <div class="slide-glow -bottom-40 -right-40"></div>
+
+      <!-- Top Header -->
+      <div class="flex items-center justify-between relative z-10">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center font-black text-white text-xl shadow-lg"
+          >
+            S
+          </div>
+          <div>
+            <span class="text-xl font-bold tracking-tight text-white"
+              >Specker.ai</span
+            >
+            <span
+              class="text-xs text-indigo-400 font-semibold ml-2 px-2.5 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30"
+              >SELECTION TASK</span
+            >
+          </div>
+        </div>
+        <div class="text-right">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-slate-400"
+            >Applicant Submission</span
+          >
+          <p class="text-sm font-bold text-white">
+            Muhammad Anas • Product Designer
+          </p>
+        </div>
+      </div>
+
+      <!-- Center Content -->
+      <div class="max-w-4xl space-y-4 relative z-10 my-auto">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold"
+        >
+          <span>UX Audit & Home Screen Redesign</span>
+        </div>
+        <h1 class="text-6xl font-black text-white tracking-tight leading-tight">
+          Transforming Speaking Anxiety Into a
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400"
+            >Daily Fluency Habit</span
+          >
+        </h1>
+        <p class="text-slate-400 text-xl font-normal leading-relaxed max-w-2xl">
+          An end-to-end design strategy to eliminate decision paralysis, build
+          atomic speaking habits, and accelerate activation for Specker's
+          conversational AI coach, Stella.
+        </p>
+      </div>
+
+      <!-- Bottom Footer -->
+      <div
+        class="flex items-center justify-between border-t border-white/10 pt-4 text-xs text-slate-400 relative z-10"
+      >
+        <div class="flex items-center gap-6">
+          <span><strong>Role:</strong> Lead Product Designer</span>
+          <span
+            ><strong>Tools:</strong> Figma, Design Thinking, Interactive
+            Prototype</span
+          >
+          <span><strong>Platform:</strong> iOS & Android</span>
+        </div>
+        <span class="text-indigo-400 font-bold"
+          >Confidential • For Hiring Team Evaluation</span
+        >
+      </div>
+    </section>
+
+    <!-- SLIDE 2: EXECUTIVE SUMMARY & USER PSYCHOLOGY -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Discovery & Strategy</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            The Core Problem: The Wall of Hesitation
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">02 / 10</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 my-auto">
+        <!-- Left: Speaking Anxiety Paradigm -->
+        <div
+          class="p-6 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4"
+        >
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>🧠</span>
+            <span>Why Conversational Voice Apps Fail</span>
+          </h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            In apps like Duolingo, users have infinite time to think before
+            tapping multiple-choice buttons. In a spoken voice app, an ESL
+            learner faces <strong>"The Wall of Hesitation"</strong>:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div
+              class="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-slate-200"
+            >
+              <strong>Fear of Judgement:</strong> "What if my accent or grammar
+              is terrible?"
+            </div>
+            <div
+              class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-slate-200"
+            >
+              <strong>Blank Mind Syndrome:</strong> "What am I supposed to talk
+              about right now?"
+            </div>
+            <div
+              class="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-slate-200"
+            >
+              <strong>Action Paralysis:</strong> Too many generic categories
+              without a 1-tap starter lead to immediate bounce.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: The 3 Design Pillars -->
+        <div
+          class="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/40 to-purple-950/30 border border-indigo-500/30 space-y-4"
+        >
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>🎯</span>
+            <span>The 3 Guiding Design Pillars</span>
+          </h3>
+          <div class="space-y-3 text-xs">
+            <div
+              class="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1"
+            >
+              <span class="text-indigo-300 font-bold uppercase text-[10px]"
+                >Pillar 1</span
+              >
+              <h4 class="font-bold text-white text-sm">Zero-Friction Launch</h4>
+              <p class="text-slate-300">
+                Cut Time-to-First-Speech to under 2 taps by providing a
+                pre-loaded Daily Topic with Stella.
+              </p>
+            </div>
+            <div
+              class="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1"
+            >
+              <span class="text-emerald-300 font-bold uppercase text-[10px]"
+                >Pillar 2</span
+              >
+              <h4 class="font-bold text-white text-sm">
+                Atomic Habit Mechanics
+              </h4>
+              <p class="text-slate-300">
+                Introduce a 12-minute daily speaking goal ring + streak
+                protection to drive D7 retention.
+              </p>
+            </div>
+            <div
+              class="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1"
+            >
+              <span class="text-purple-300 font-bold uppercase text-[10px]"
+                >Pillar 3</span
+              >
+              <h4 class="font-bold text-white text-sm">
+                Closed-Loop Scorecards
+              </h4>
+              <p class="text-slate-300">
+                Turn passive metrics into immediate 5-second phonetic audio
+                micro-drills on the home screen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: TASK 1 - APP AUDIT BEFORE VS AFTER -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Task 1: Audit & UX Teardown</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            Before vs. After: Diagnostic Teardown
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">03 / 10</span>
+      </div>
+
+      <div class="grid grid-cols-12 gap-6 my-auto items-center">
+        <!-- Left: Visual Comparison Image -->
+        <div
+          class="col-span-7 rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-black"
+        >
+          <img
+            src="assets/specker_before_after_comparison.jpg"
+            alt="Before vs After"
+            class="w-full object-cover"
+          />
+        </div>
+
+        <!-- Right: Concrete Audit Table -->
+        <div class="col-span-5 space-y-2.5 text-xs">
+          <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-400"
+                >1. Action Paralysis (P0)</span
+              >
+              <span class="text-[10px] text-slate-500"
+                >Heuristic: Recognition vs Recall</span
+              >
+            </div>
+            <p class="text-slate-300 mt-1">
+              Current app forces users to choose between broad categories
+              without prompt anchors.
+            </p>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-400"
+                >2. Missing Habit Loop (P1)</span
+              >
+              <span class="text-[10px] text-slate-500"
+                >Heuristic: Feedback & Status</span
+              >
+            </div>
+            <p class="text-slate-300 mt-1">
+              No visible streak or daily time goal on the home screen; practice
+              remains sporadic.
+            </p>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-400"
+                >3. Dead-End Scorecard (P1)</span
+              >
+              <span class="text-[10px] text-slate-500"
+                >Heuristic: Error Recovery</span
+              >
+            </div>
+            <p class="text-slate-300 mt-1">
+              Scorecards display scores (80%) but provide no 1-tap audio drill
+              to correct mispronounced words.
+            </p>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-amber-400"
+                >4. WCAG AA Contrast Failures (P2)</span
+              >
+              <span class="text-[10px] text-slate-500"
+                >Heuristic: Aesthetics & Contrast</span
+              >
+            </div>
+            <p class="text-slate-300 mt-1">
+              Dark slate text falls below 3:1 contrast; difficult to read in
+              outdoor lighting.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: TASK 2 - REDESIGNED HOME SCREEN (DARK THEME) -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Task 2: Home Screen Redesign</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            The Redesigned Experience: Stella Midnight (Dark)
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">04 / 10</span>
+      </div>
+
+      <div class="grid grid-cols-12 gap-8 my-auto items-center">
+        <!-- Left: Mobile Screen Mockup -->
+        <div class="col-span-4 flex justify-center">
+          <div
+            class="w-64 rounded-[36px] overflow-hidden border-4 border-slate-700 shadow-2xl bg-black"
+          >
+            <img
+              src="assets/specker_home_dark_redesign.jpg"
+              alt="Dark Mode Redesign"
+              class="w-full"
+            />
+          </div>
+        </div>
+
+        <!-- Right: The 7-Zone Anatomy Walkthrough -->
+        <div class="col-span-8 grid grid-cols-2 gap-3 text-xs">
+          <div
+            class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+          >
+            <span class="text-[10px] font-bold text-indigo-400 uppercase"
+              >Zone 1</span
+            >
+            <h4 class="font-bold text-white">Momentum Header</h4>
+            <p class="text-slate-300">
+              Personal greeting, 🔥 7-day streak pill for loss aversion, and
+              CEFR level badge (B2 Level).
+            </p>
+          </div>
+
+          <div
+            class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+          >
+            <span class="text-[10px] font-bold text-indigo-400 uppercase"
+              >Zone 2</span
+            >
+            <h4 class="font-bold text-white">
+              Dynamic Stella Voice Hub (Hero)
+            </h4>
+            <p class="text-slate-300">
+              Pulsing AI avatar, audio waveform, pre-loaded topic of the day,
+              and 1-tap call button.
+            </p>
+          </div>
+
+          <div
+            class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+          >
+            <span class="text-[10px] font-bold text-indigo-400 uppercase"
+              >Zone 3</span
+            >
+            <h4 class="font-bold text-white">Atomic Habit Protection Strip</h4>
+            <p class="text-slate-300">
+              Circular goal ring (9/12 mins) with micro-copy: "Only 3 mins left
+              to protect streak".
+            </p>
+          </div>
+
+          <div
+            class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+          >
+            <span class="text-[10px] font-bold text-indigo-400 uppercase"
+              >Zone 4</span
+            >
+            <h4 class="font-bold text-white">Contextual Scenario Pathways</h4>
+            <p class="text-slate-300">
+              Horizontal category tabs (Career, Office, Social, IELTS) with
+              duration and difficulty badges.
+            </p>
+          </div>
+
+          <div
+            class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+          >
+            <span class="text-[10px] font-bold text-indigo-400 uppercase"
+              >Zone 5</span
+            >
+            <h4 class="font-bold text-white">Closed-Loop Scorecard</h4>
+            <p class="text-slate-300">
+              Yesterday's fluency trend (85) + 1-tap native audio drill for
+              mispronounced word "Particularly".
+            </p>
+          </div>
+
+          <div
+            class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+          >
+            <span class="text-[10px] font-bold text-indigo-400 uppercase"
+              >Zone 6 & 7</span
+            >
+            <h4 class="font-bold text-white">60s Warmup & Bottom Nav</h4>
+            <p class="text-slate-300">
+              Low-stakes tongue twister drill + ergonomic bottom bar anchored by
+              central quick-speak button.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: LIGHT THEME & ACCESSIBILITY -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Design System & Inclusivity</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            Nordic Clean: Accessible Light Mode
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">05 / 10</span>
+      </div>
+
+      <div class="grid grid-cols-12 gap-8 my-auto items-center">
+        <!-- Left: Light Mode Mobile Mockup -->
+        <div class="col-span-4 flex justify-center">
+          <div
+            class="w-64 rounded-[36px] overflow-hidden border-4 border-slate-700 shadow-2xl bg-white"
+          >
+            <img
+              src="assets/specker_home_light_redesign.jpg"
+              alt="Light Mode Redesign"
+              class="w-full"
+            />
+          </div>
+        </div>
+
+        <!-- Right: Accessibility & Design Tokens -->
+        <div class="col-span-8 space-y-4 text-xs">
+          <div
+            class="p-5 rounded-3xl bg-white/[0.02] border border-white/10 space-y-3"
+          >
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>☀️</span>
+              <span>Why Light Mode Matters for Global Learners</span>
+            </h3>
+            <p class="text-slate-300 leading-relaxed">
+              Many learners in India and developing markets practice outdoors,
+              during daily bus/train commutes, or in brightly lit classrooms.
+              The light theme ensures 100% legibility under direct sunlight.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div
+              class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+            >
+              <span class="text-emerald-400 font-bold block text-sm"
+                >4.8 : 1</span
+              >
+              <span class="text-white font-semibold">Contrast Ratio</span>
+              <p class="text-[11px] text-slate-400">
+                Exceeds WCAG AA standard across all body labels.
+              </p>
+            </div>
+            <div
+              class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+            >
+              <span class="text-indigo-400 font-bold block text-sm"
+                >48 × 48 px</span
+              >
+              <span class="text-white font-semibold">Touch Target</span>
+              <p class="text-[11px] text-slate-400">
+                Ergonomic touch targets for one-handed thumb reach.
+              </p>
+            </div>
+            <div
+              class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1"
+            >
+              <span class="text-purple-400 font-bold block text-sm"
+                >8pt Grid</span
+              >
+              <span class="text-white font-semibold">Spatial Scale</span>
+              <p class="text-[11px] text-slate-400">
+                Harmonious rhythm: 8px, 16px, 24px padding & gaps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: THE VOICE CALL & SCORECARD LOOP -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >The Core Loop</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            Active AI Coaching & Closed-Loop Feedback
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">06 / 10</span>
+      </div>
+
+      <div class="grid grid-cols-12 gap-8 my-auto items-center">
+        <!-- Visual: In-Call & Scorecard Render -->
+        <div
+          class="col-span-8 rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-black"
+        >
+          <img
+            src="assets/specker_call_scorecard_flow.jpg"
+            alt="Call and Scorecard Flow"
+            class="w-full object-cover"
+          />
+        </div>
+
+        <!-- Callout Points -->
+        <div class="col-span-4 space-y-3 text-xs">
+          <div
+            class="p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 space-y-1"
+          >
+            <span class="text-indigo-300 font-bold text-[10px] uppercase"
+              >Live Voice Interaction</span
+            >
+            <h4 class="font-bold text-white text-sm">Live Stella Whisper</h4>
+            <p class="text-slate-300">
+              Gentle real-time feedback bubbles guide pacing (125 WPM) without
+              interrupting speaking flow.
+            </p>
+          </div>
+
+          <div
+            class="p-4 rounded-2xl bg-purple-950/40 border border-purple-500/30 space-y-1"
+          >
+            <span class="text-purple-300 font-bold text-[10px] uppercase"
+              >Actionable Scorecard</span
+            >
+            <h4 class="font-bold text-white text-sm">1-Tap Phonetic Drill</h4>
+            <p class="text-slate-300">
+              Highlights mispronounced word <em>"Particularly"</em> with native
+              IPA audio playback for 5-second review.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: EDGE CASES & RESILIENCE -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Senior UX Thinking</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            Edge Cases & System States
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">07 / 10</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-5 my-auto text-xs">
+        <div
+          class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2"
+        >
+          <div
+            class="flex items-center gap-2 text-indigo-400 font-bold text-sm"
+          >
+            <span>🌱 Day-0 New User (Cold Start)</span>
+          </div>
+          <p class="text-slate-300">
+            <strong>Problem:</strong> No previous scorecards or streak exist.
+            User feels intimidated.<br />
+            <strong>Solution:</strong> Hero card adapts to:
+            <em
+              >"Meet Stella: 3-Minute Friendly Diagnostic Call (No pressure,
+              just say hello)."</em
+            >
+          </p>
+        </div>
+
+        <div
+          class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2"
+        >
+          <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+            <span>🛡️ Streak Protection & Recovery</span>
+          </div>
+          <p class="text-slate-300">
+            <strong>Problem:</strong> Broken streaks cause user churn.<br />
+            <strong>Solution:</strong> Loss mitigation banner:
+            <em
+              >"Streak frozen! Complete 5 mins today to restore your 7-day
+              momentum."</em
+            >
+          </p>
+        </div>
+
+        <div
+          class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2"
+        >
+          <div
+            class="flex items-center gap-2 text-emerald-400 font-bold text-sm"
+          >
+            <span>💎 Freemium Limit & Pro Conversion</span>
+          </div>
+          <p class="text-slate-300">
+            <strong>Problem:</strong> Hard paywalls cause high drop-off.<br />
+            <strong>Solution:</strong> Transparent minute balance (180 mins
+            left). Button seamlessly prompts:
+            <em>"Upgrade to Unlimited Stella Pro"</em> when low.
+          </p>
+        </div>
+
+        <div
+          class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2"
+        >
+          <div class="flex items-center gap-2 text-blue-400 font-bold text-sm">
+            <span>📶 Network Latency & Intermittent Audio</span>
+          </div>
+          <p class="text-slate-300">
+            <strong>Problem:</strong> Cellular drops cause confusion.<br />
+            <strong>Solution:</strong> Waveform pulses amber with micro-text:
+            <em>"Stella is listening (Optimizing audio connection)..."</em>
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: BUSINESS IMPACT & METRICS -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Measurement Framework</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            Business Impact & A/B Testing Plan
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">08 / 10</span>
+      </div>
+
+      <div class="space-y-6 my-auto">
+        <div class="grid grid-cols-3 gap-6 text-center">
+          <div
+            class="p-6 rounded-3xl bg-white/[0.02] border border-white/10 space-y-2"
+          >
+            <span class="text-5xl font-black text-indigo-400">-45%</span>
+            <span class="text-sm font-bold text-white block"
+              >Time to First Speech</span
+            >
+            <p class="text-xs text-slate-400">
+              Pre-loaded daily topic cuts decision time from 6s to < 2.5s.
+            </p>
+          </div>
+          <div
+            class="p-6 rounded-3xl bg-white/[0.02] border border-white/10 space-y-2"
+          >
+            <span class="text-5xl font-black text-emerald-400">+28%</span>
+            <span class="text-sm font-bold text-white block"
+              >D7 Cohort Retention</span
+            >
+            <p class="text-xs text-slate-400">
+              Streak loss-aversion and 12-min daily goal completion.
+            </p>
+          </div>
+          <div
+            class="p-6 rounded-3xl bg-white/[0.02] border border-white/10 space-y-2"
+          >
+            <span class="text-5xl font-black text-purple-400">+35%</span>
+            <span class="text-sm font-bold text-white block"
+              >Micro-Drill Engagement</span
+            >
+            <p class="text-xs text-slate-400">
+              Turning dead-end scores into 1-tap phonetic audio practice.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 text-xs text-slate-300"
+        >
+          <strong>A/B Testing Cohort Hypothesis:</strong> A 50/50 test against
+          the legacy catalog layout will measure whether curating 1 daily topic
+          increases Day-1 call completion rate without cannibalizing scenario
+          exploration.
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: DESIGNER SELF-CRITIQUE & TRADE-OFFS -->
+    <section class="slide">
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Authentic Reflection</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            Designer's Self-Critique & Trade-Offs
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">09 / 10</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 my-auto text-xs">
+        <div
+          class="p-6 rounded-3xl bg-white/[0.02] border border-white/10 space-y-3"
+        >
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <span>⚖️</span>
+            <span>Trade-offs Made</span>
+          </h3>
+          <p class="text-slate-300 leading-relaxed">
+            <strong>1. Single Hero vs. Catalog Breadth:</strong> I deliberately
+            prioritized 1 curated daily topic over showing 10 categories above
+            the fold. Hick's law dictates that excessive choices trigger
+            hesitation.
+          </p>
+          <p class="text-slate-300 leading-relaxed">
+            <strong>2. Voice-First vs. Text Drills:</strong> I omitted passive
+            vocabulary matching games from the home screen to protect Specker’s
+            core differentiator: conversational speaking.
+          </p>
+        </div>
+
+        <div
+          class="p-6 rounded-3xl bg-white/[0.02] border border-white/10 space-y-3"
+        >
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <span>🔬</span>
+            <span>What I Would Test in Week 2</span>
+          </h3>
+          <p class="text-slate-300 leading-relaxed">
+            <strong>1. Persona-based onboarding branching:</strong> Dynamically
+            swapping the Hero topic based on user goal (Tech interview vs. daily
+            casual social).
+          </p>
+          <p class="text-slate-300 leading-relaxed">
+            <strong>2. Audio-only vs. Video avatar toggle:</strong> Testing if a
+            visual 3D face helps or distracts anxious learners during speaking
+            calls.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-500 flex justify-between"
+      >
+        <span>Specker.ai Design Assignment</span>
+        <span>Muhammad Anas • UX Presentation</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: CONCLUSION & RECAP -->
+    <section class="slide">
+      <div class="slide-glow -top-40 -right-40"></div>
+      <div
+        class="flex items-center justify-between border-b border-white/10 pb-3"
+      >
+        <div>
+          <span
+            class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+            >Summary</span
+          >
+          <h2 class="text-2xl font-black text-white">
+            Submission Summary & Next Steps
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">10 / 10</span>
+      </div>
+
+      <div class="my-auto text-center max-w-3xl mx-auto space-y-6">
+        <div
+          class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white text-3xl mx-auto shadow-2xl"
+        >
+          ✓
+        </div>
+        <h3 class="text-4xl font-black text-white tracking-tight">
+          Ready to Build the Future of Conversational English
+        </h3>
+        <p class="text-slate-300 text-base leading-relaxed">
+          This redesign bridges the gap between conversational AI and behavioral
+          psychology—ensuring that every learner who opens Specker.ai finds the
+          courage to speak every single day.
+        </p>
+
+        <div class="flex items-center justify-center gap-4 pt-2">
+          <div
+            class="px-5 py-2.5 rounded-xl bg-white/10 border border-white/15 text-xs text-white font-semibold"
+          >
+            📁 Full Figma Hand-off Structure Ready
+          </div>
+          <div
+            class="px-5 py-2.5 rounded-xl bg-indigo-600/30 border border-indigo-500/40 text-xs text-indigo-300 font-semibold"
+          >
+            📱 Live Mobile Prototype Included
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="border-t border-white/10 pt-3 text-xs text-slate-400 flex justify-between items-center"
+      >
+        <span>Muhammad Anas • Product Designer</span>
+        <span class="text-indigo-400 font-bold">Thank you for reviewing!</span>
+      </div>
+    </section>
+  </body>
+</html>

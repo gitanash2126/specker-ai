@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Specker.ai – Redesigned Home Screen Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#f5f3ff",
+                100: "#ede9fe",
+                400: "#a78bfa",
+                500: "#8b5cf6",
+                600: "#7c3aed",
+                700: "#6d28d9",
+              },
+              specker: {
+                bgDark: "#0B0D17",
+                cardDark: "#141829",
+                cardBorderDark: "#232946",
+                accentGlow: "#6366F1",
+                emerald: "#10B981",
+                amber: "#F59E0B",
+                coral: "#F43F5E",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+            },
+            animation: {
+              "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              "wave-bar": "waveBar 1.2s ease-in-out infinite alternate",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              waveBar: {
+                "0%": { height: "6px" },
+                "100%": { height: "28px" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-6px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .glass-card-dark {
+        background: rgba(20, 24, 41, 0.82);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-2 sm:p-6 transition-colors duration-300 font-sans select-none"
+  >
+    <!-- Desktop Presentation Toolbar -->
+    <header
+      class="w-full max-w-md mb-3 flex items-center justify-between px-3 py-2 bg-slate-800/80 rounded-2xl border border-slate-700/60 shadow-lg text-xs"
+    >
+      <div class="flex items-center gap-2">
+        <span
+          class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"
+        ></span>
+        <span class="font-semibold text-slate-200"
+          >Specker.ai Design Redesign</span
+        >
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          onclick="toggleTheme()"
+          class="px-2.5 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-200 transition flex items-center gap-1.5 font-medium"
+        >
+          <span id="theme-icon">☀️ Light</span>
+        </button>
+        <button
+          onclick="openCallModal()"
+          class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition flex items-center gap-1 font-medium"
+        >
+          <span>⚡ Test Call</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Frame Device Container (iPhone 16 Pro Style) -->
+    <main
+      class="w-full max-w-[400px] h-[860px] max-h-[92vh] rounded-[48px] overflow-hidden border-[9px] border-slate-800 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] relative flex flex-col transition-colors duration-300 dark:bg-specker-bgDark bg-slate-50 dark:text-slate-100 text-slate-900"
+    >
+      <!-- Dynamic Island & Status Bar -->
+      <div
+        class="pt-3 px-7 pb-2 flex items-center justify-between text-[13px] font-semibold tracking-tight z-30 shrink-0 select-none"
+      >
+        <span class="dark:text-slate-200 text-slate-700 font-medium">9:41</span>
+
+        <!-- Dynamic Island pill -->
+        <div
+          class="w-28 h-6 bg-black rounded-full flex items-center justify-end px-2.5 shadow-sm relative"
+        >
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+          ></span>
+        </div>
+
+        <div
+          class="flex items-center gap-1.5 text-xs dark:text-slate-200 text-slate-700"
+        >
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path
+              d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.22 19.64 10.57 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"
+            />
+          </svg>
+          <span class="text-[10px] font-bold">5G</span>
+          <div
+            class="w-5 h-2.5 border border-current rounded-sm p-0.5 flex items-center"
+          >
+            <div class="h-full w-3/4 bg-current rounded-[1px]"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scrollable Main Screen Content -->
+      <div
+        id="home-screen-scroll"
+        class="flex-1 overflow-y-auto px-5 pb-24 pt-1 no-scrollbar space-y-5"
+      >
+        <!-- Top Profile & Streak Bar -->
+        <div class="flex items-center justify-between pt-1">
+          <div class="flex items-center gap-3">
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                alt="User Avatar"
+                class="w-11 h-11 rounded-full object-cover ring-2 ring-indigo-500/50 p-0.5"
+              />
+              <span
+                class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 dark:border-specker-bgDark border-white"
+              ></span>
+            </div>
+            <div>
+              <p
+                class="text-[11px] font-medium tracking-wide uppercase dark:text-indigo-300/80 text-indigo-600"
+              >
+                Daily Momentum
+              </p>
+              <h1
+                class="text-lg font-bold tracking-tight dark:text-white text-slate-900 leading-tight"
+              >
+                Hi, Anas 👋
+              </h1>
+            </div>
+          </div>
+
+          <!-- Badges (Streak & Level) -->
+          <div class="flex items-center gap-2">
+            <!-- Streak Pill -->
+            <div
+              onclick="
+                showToast(
+                  '🔥 7-day speaking streak! You are in the top 10% of learners.',
+                )
+              "
+              class="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 rounded-full dark:bg-amber-500/15 bg-amber-50 dark:border-amber-500/30 border border-amber-200 text-amber-600 dark:text-amber-400 font-bold text-xs shadow-sm hover:scale-105 transition-transform"
+            >
+              <span>🔥</span>
+              <span>7 Days</span>
+            </div>
+
+            <!-- Proficiency Badge -->
+            <div
+              onclick="
+                showToast('Speaking Level: B2 Upper Intermediate (CEFR)')
+              "
+              class="cursor-pointer flex items-center gap-1 px-2.5 py-1.5 rounded-full dark:bg-indigo-500/15 bg-indigo-50 dark:border-indigo-500/30 border border-indigo-200 text-indigo-600 dark:text-indigo-400 font-bold text-xs"
+            >
+              <span>B2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO SECTION: Primary Daily Practice with Stella -->
+        <section
+          class="relative rounded-3xl overflow-hidden p-5 dark:bg-gradient-to-b dark:from-[#1E2342] dark:to-[#141829] bg-gradient-to-b from-indigo-50 via-white to-slate-50 border dark:border-indigo-500/30 border-indigo-200/80 shadow-[0_12px_35px_-8px_rgba(99,102,241,0.25)]"
+        >
+          <!-- Glowing orb backdrop -->
+          <div
+            class="absolute -right-10 -top-10 w-44 h-44 rounded-full dark:bg-indigo-500/20 bg-indigo-200/40 blur-3xl pointer-events-none"
+          ></div>
+
+          <!-- Header of Hero -->
+          <div class="flex items-start justify-between relative z-10">
+            <div class="flex items-center gap-3">
+              <!-- Stella Animated Avatar with Pulse -->
+              <div class="relative flex items-center justify-center">
+                <div
+                  class="absolute inset-0 rounded-full bg-indigo-500/30 animate-ping"
+                ></div>
+                <div
+                  class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-500 p-0.5 shadow-md flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80"
+                    alt="Stella AI Coach"
+                    class="w-full h-full object-cover rounded-[14px]"
+                  />
+                </div>
+                <span
+                  class="absolute -bottom-1 -right-1 bg-emerald-500 text-[9px] text-white font-extrabold px-1.5 py-0.2 rounded-full border dark:border-specker-bgDark border-white"
+                >
+                  LIVE
+                </span>
+              </div>
+
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3
+                    class="font-bold text-base dark:text-white text-slate-900 leading-tight"
+                  >
+                    Stella Voice Coach
+                  </h3>
+                  <span
+                    class="px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wide uppercase dark:bg-indigo-400/20 bg-indigo-100 dark:text-indigo-300 text-indigo-700"
+                    >AI CALL</span
+                  >
+                </div>
+                <p
+                  class="text-xs dark:text-slate-400 text-slate-500 mt-0.5 font-medium"
+                >
+                  Ready for your daily 12-min session
+                </p>
+              </div>
+            </div>
+
+            <!-- Minutes Balance Pill -->
+            <div class="text-right">
+              <span
+                class="text-[10px] uppercase font-bold dark:text-slate-400 text-slate-500 block"
+                >Balance</span
+              >
+              <span
+                class="text-xs font-extrabold text-emerald-500 dark:text-emerald-400"
+                >180 mins</span
+              >
+            </div>
+          </div>
+
+          <!-- Topic Banner Inside Hero -->
+          <div
+            class="mt-4 p-3 rounded-2xl dark:bg-black/30 bg-white/70 border dark:border-white/5 border-indigo-100 flex items-center justify-between"
+          >
+            <div class="flex items-center gap-2.5">
+              <div
+                class="w-8 h-8 rounded-xl dark:bg-indigo-500/20 bg-indigo-100 text-indigo-500 flex items-center justify-center text-sm font-bold"
+              >
+                🎙️
+              </div>
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider font-semibold dark:text-indigo-300 text-indigo-600"
+                >
+                  Today's Focus
+                </p>
+                <p class="text-xs font-bold dark:text-slate-100 text-slate-800">
+                  Defending Ideas in Meetings
+                </p>
+              </div>
+            </div>
+
+            <!-- Animated Voice Waveform snippet -->
+            <div class="flex items-center gap-0.5 h-6 px-2">
+              <span
+                class="w-1 bg-indigo-500 rounded-full h-3 animate-pulse"
+              ></span>
+              <span
+                class="w-1 bg-indigo-400 rounded-full h-5 animate-pulse delay-75"
+              ></span>
+              <span
+                class="w-1 bg-indigo-500 rounded-full h-2 animate-pulse delay-150"
+              ></span>
+              <span
+                class="w-1 bg-purple-500 rounded-full h-4 animate-pulse delay-100"
+              ></span>
+            </div>
+          </div>
+
+          <!-- Primary CTA Button -->
+          <div class="mt-4 flex items-center gap-2">
+            <button
+              onclick="openCallModal()"
+              class="flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-[0_8px_20px_rgba(99,102,241,0.4)] active:scale-[0.98] transition flex items-center justify-center gap-2"
+            >
+              <svg
+                class="w-4 h-4 fill-current animate-pulse"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.38-1.14-1-1.14z"
+                />
+              </svg>
+              <span>Start Daily Call with Stella</span>
+            </button>
+
+            <!-- Schedule Call Option -->
+            <button
+              onclick="showToast('⏰ Daily Stella Call scheduled for 6:30 PM!')"
+              title="Schedule Call"
+              class="w-12 h-12 rounded-2xl dark:bg-white/10 bg-slate-100 dark:hover:bg-white/15 hover:bg-slate-200 border dark:border-white/10 border-slate-200 flex items-center justify-center text-slate-700 dark:text-slate-200 text-lg transition"
+            >
+              📅
+            </button>
+          </div>
+        </section>
+
+        <!-- HABIT & DAILY GOAL PROGRESS STRIP -->
+        <section
+          class="p-3.5 rounded-2xl dark:bg-specker-cardDark bg-white border dark:border-specker-cardBorderDark border-slate-200 shadow-sm flex items-center justify-between"
+        >
+          <div class="flex items-center gap-3">
+            <!-- Circular Mini Progress -->
+            <div class="relative w-10 h-10 flex items-center justify-center">
+              <svg class="w-10 h-10 transform -rotate-90">
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="16"
+                  stroke="currentColor"
+                  stroke-width="3.5"
+                  class="dark:text-slate-800 text-slate-200"
+                  fill="transparent"
+                />
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="16"
+                  stroke="currentColor"
+                  stroke-width="3.5"
+                  stroke-dasharray="100"
+                  stroke-dashoffset="25"
+                  stroke-linecap="round"
+                  class="text-emerald-500"
+                  fill="transparent"
+                />
+              </svg>
+              <span class="absolute text-[10px] font-extrabold">75%</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <h4 class="text-xs font-bold dark:text-white text-slate-800">
+                  Daily Speaking Goal
+                </h4>
+                <span class="text-[10px] text-emerald-500 font-semibold"
+                  >9 / 12 mins</span
+                >
+              </div>
+              <p class="text-[11px] dark:text-slate-400 text-slate-500">
+                Only 3 mins left to protect streak
+              </p>
+            </div>
+          </div>
+
+          <button
+            onclick="openCallModal()"
+            class="text-xs font-bold text-indigo-500 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
+          >
+            <span>Complete</span>
+            <span>→</span>
+          </button>
+        </section>
+
+        <!-- SCENARIOS: Roleplay & Practical Speaking -->
+        <section class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3
+                class="font-bold text-sm tracking-tight dark:text-white text-slate-900"
+              >
+                Practice Scenarios
+              </h3>
+              <p class="text-[11px] dark:text-slate-400 text-slate-500">
+                Simulate real-life conversation environments
+              </p>
+            </div>
+            <button
+              onclick="switchTab('scenarios')"
+              class="text-xs font-semibold text-indigo-500 hover:underline"
+            >
+              See all (18)
+            </button>
+          </div>
+
+          <!-- Category Horizontal Filter Tabs -->
+          <div
+            class="flex gap-2 overflow-x-auto no-scrollbar py-0.5 text-xs font-semibold"
+          >
+            <span
+              class="px-3 py-1 rounded-full bg-indigo-600 text-white cursor-pointer shadow-sm"
+              >All</span
+            >
+            <span
+              class="px-3 py-1 rounded-full dark:bg-slate-800 bg-slate-100 dark:text-slate-300 text-slate-600 hover:bg-indigo-50 cursor-pointer"
+              >Career & HR</span
+            >
+            <span
+              class="px-3 py-1 rounded-full dark:bg-slate-800 bg-slate-100 dark:text-slate-300 text-slate-600 hover:bg-indigo-50 cursor-pointer"
+              >Workplace</span
+            >
+            <span
+              class="px-3 py-1 rounded-full dark:bg-slate-800 bg-slate-100 dark:text-slate-300 text-slate-600 hover:bg-indigo-50 cursor-pointer"
+              >IELTS / Exam</span
+            >
+          </div>
+
+          <!-- Horizontal Scrollable Scenario Cards -->
+          <div class="flex gap-3 overflow-x-auto no-scrollbar pb-1 pt-0.5">
+            <!-- Card 1: Job Interview -->
+            <div
+              onclick="
+                openScenarioDetail(
+                  'Tech Job Interview',
+                  'HR Behavioral & STAR method practice with Stella',
+                  'Advanced • 15 mins',
+                )
+              "
+              class="cursor-pointer min-w-[170px] w-[170px] p-3.5 rounded-2xl dark:bg-specker-cardDark bg-white border dark:border-specker-cardBorderDark border-slate-200 hover:border-indigo-500/50 shadow-sm transition-all hover:-translate-y-1"
+            >
+              <div
+                class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-500 flex items-center justify-center text-xl mb-2.5"
+              >
+                💼
+              </div>
+              <span
+                class="text-[9px] font-bold uppercase tracking-wider text-blue-500 bg-blue-500/10 px-2 py-0.5 rounded-md"
+                >Career</span
+              >
+              <h4
+                class="font-bold text-xs mt-1.5 dark:text-white text-slate-900 line-clamp-1"
+              >
+                Job Interview Prep
+              </h4>
+              <p class="text-[10px] dark:text-slate-400 text-slate-500 mt-0.5">
+                STAR method questions
+              </p>
+              <div
+                class="mt-3 pt-2.5 border-t dark:border-slate-800 border-slate-100 flex items-center justify-between text-[10px] font-semibold dark:text-slate-400 text-slate-500"
+              >
+                <span>15 min</span>
+                <span class="text-indigo-500">Start →</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Workplace Standup -->
+            <div
+              onclick="
+                openScenarioDetail(
+                  'Engineering Standup',
+                  'Update your team concisely on sprint blockers and achievements',
+                  'Intermediate • 8 mins',
+                )
+              "
+              class="cursor-pointer min-w-[170px] w-[170px] p-3.5 rounded-2xl dark:bg-specker-cardDark bg-white border dark:border-specker-cardBorderDark border-slate-200 hover:border-indigo-500/50 shadow-sm transition-all hover:-translate-y-1"
+            >
+              <div
+                class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-500 flex items-center justify-center text-xl mb-2.5"
+              >
+                👥
+              </div>
+              <span
+                class="text-[9px] font-bold uppercase tracking-wider text-purple-500 bg-purple-500/10 px-2 py-0.5 rounded-md"
+                >Office</span
+              >
+              <h4
+                class="font-bold text-xs mt-1.5 dark:text-white text-slate-900 line-clamp-1"
+              >
+                Daily Standup Update
+              </h4>
+              <p class="text-[10px] dark:text-slate-400 text-slate-500 mt-0.5">
+                Concise project status
+              </p>
+              <div
+                class="mt-3 pt-2.5 border-t dark:border-slate-800 border-slate-100 flex items-center justify-between text-[10px] font-semibold dark:text-slate-400 text-slate-500"
+              >
+                <span>8 min</span>
+                <span class="text-indigo-500">Start →</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Casual Coffee Chat -->
+            <div
+              onclick="
+                openScenarioDetail(
+                  'Coffee Break Social',
+                  'Natural small talk, banter, weekend plans and networking',
+                  'Beginner • 10 mins',
+                )
+              "
+              class="cursor-pointer min-w-[170px] w-[170px] p-3.5 rounded-2xl dark:bg-specker-cardDark bg-white border dark:border-specker-cardBorderDark border-slate-200 hover:border-indigo-500/50 shadow-sm transition-all hover:-translate-y-1"
+            >
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center text-xl mb-2.5"
+              >
+                ☕
+              </div>
+              <span
+                class="text-[9px] font-bold uppercase tracking-wider text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-md"
+                >Social</span
+              >
+              <h4
+                class="font-bold text-xs mt-1.5 dark:text-white text-slate-900 line-clamp-1"
+              >
+                Casual Coffee Chat
+              </h4>
+              <p class="text-[10px] dark:text-slate-400 text-slate-500 mt-0.5">
+                Overcoming hesitation
+              </p>
+              <div
+                class="mt-3 pt-2.5 border-t dark:border-slate-800 border-slate-100 flex items-center justify-between text-[10px] font-semibold dark:text-slate-400 text-slate-500"
+              >
+                <span>10 min</span>
+                <span class="text-indigo-500">Start →</span>
+              </div>
+            </div>
+
+            <!-- Card 4: IELTS Speaking Part 2 -->
+            <div
+              onclick="
+                openScenarioDetail(
+                  'IELTS Speaking Mock',
+                  'Cue card topic with 1 minute prep and 2 minutes continuous speech',
+                  'Exam Prep • 12 mins',
+                )
+              "
+              class="cursor-pointer min-w-[170px] w-[170px] p-3.5 rounded-2xl dark:bg-specker-cardDark bg-white border dark:border-specker-cardBorderDark border-slate-200 hover:border-indigo-500/50 shadow-sm transition-all hover:-translate-y-1"
+            >
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xl mb-2.5"
+              >
+                🎓
+              </div>
+              <span
+                class="text-[9px] font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-md"
+                >IELTS</span
+              >
+              <h4
+                class="font-bold text-xs mt-1.5 dark:text-white text-slate-900 line-clamp-1"
+              >
+                IELTS Cue Card Test
+              </h4>
+              <p class="text-[10px] dark:text-slate-400 text-slate-500 mt-0.5">
+                Band 7.5+ evaluation
+              </p>
+              <div
+                class="mt-3 pt-2.5 border-t dark:border-slate-800 border-slate-100 flex items-center justify-between text-[10px] font-semibold dark:text-slate-400 text-slate-500"
+              >
+                <span>12 min</span>
+                <span class="text-indigo-500">Start →</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RECENT SCORECARD & ACTIONABLE FEEDBACK -->
+        <section class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3
+                class="font-bold text-sm tracking-tight dark:text-white text-slate-900"
+              >
+                Latest Speech Analysis
+              </h3>
+              <p class="text-[11px] dark:text-slate-400 text-slate-500">
+                From yesterday's session with Stella
+              </p>
+            </div>
+            <button
+              onclick="openScorecardModal()"
+              class="text-xs font-semibold text-indigo-500 hover:underline"
+            >
+              Full Report
+            </button>
+          </div>
+
+          <div
+            class="p-4 rounded-3xl dark:bg-specker-cardDark bg-white border dark:border-specker-cardBorderDark border-slate-200 shadow-sm space-y-3.5"
+          >
+            <!-- Top Row: Overall Score & Trend -->
+            <div
+              class="flex items-center justify-between pb-3 border-b dark:border-slate-800 border-slate-100"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-indigo-600 text-white font-extrabold text-xl flex items-center justify-center shadow-md"
+                >
+                  85
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span
+                      class="font-bold text-sm dark:text-white text-slate-900"
+                      >Overall Fluency</span
+                    >
+                    <span
+                      class="text-[10px] text-emerald-500 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded"
+                      >+4 pts</span
+                    >
+                  </div>
+                  <p class="text-[11px] dark:text-slate-400 text-slate-500">
+                    Steady pacing & fewer filler words
+                  </p>
+                </div>
+              </div>
+
+              <!-- Mini Sparkline visualization -->
+              <div class="w-20 h-8 flex items-end gap-1">
+                <span class="w-2 h-4 bg-indigo-400/40 rounded-t"></span>
+                <span class="w-2 h-5 bg-indigo-400/50 rounded-t"></span>
+                <span class="w-2 h-5 bg-indigo-400/60 rounded-t"></span>
+                <span class="w-2 h-6 bg-indigo-400/70 rounded-t"></span>
+                <span class="w-2 h-7 bg-indigo-500 rounded-t"></span>
+                <span class="w-2 h-8 bg-indigo-600 rounded-t"></span>
+              </div>
+            </div>
+
+            <!-- 3 Pillars Breakdown (Pills) -->
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div
+                class="p-2.5 rounded-xl dark:bg-slate-800/60 bg-slate-50 border dark:border-slate-700/40 border-slate-100"
+              >
+                <span
+                  class="text-[10px] uppercase font-bold dark:text-slate-400 text-slate-500 block"
+                  >Pronunciation</span
+                >
+                <span class="text-sm font-black text-emerald-500">79%</span>
+              </div>
+              <div
+                class="p-2.5 rounded-xl dark:bg-slate-800/60 bg-slate-50 border dark:border-slate-700/40 border-slate-100"
+              >
+                <span
+                  class="text-[10px] uppercase font-bold dark:text-slate-400 text-slate-500 block"
+                  >Grammar</span
+                >
+                <span class="text-sm font-black text-indigo-500">92%</span>
+              </div>
+              <div
+                class="p-2.5 rounded-xl dark:bg-slate-800/60 bg-slate-50 border dark:border-slate-700/40 border-slate-100"
+              >
+                <span
+                  class="text-[10px] uppercase font-bold dark:text-slate-400 text-slate-500 block"
+                  >Pacing</span
+                >
+                <span class="text-sm font-black text-amber-500">128 wpm</span>
+              </div>
+            </div>
+
+            <!-- Actionable Growth Chip: 1 Word to Polish -->
+            <div
+              class="p-2.5 rounded-2xl dark:bg-indigo-950/40 bg-indigo-50/70 border dark:border-indigo-800/40 border-indigo-100 flex items-center justify-between"
+            >
+              <div class="flex items-center gap-2">
+                <span class="text-xs">💡</span>
+                <span
+                  class="text-[11px] font-medium dark:text-indigo-200 text-indigo-900"
+                  >Word to polish: <strong>"Particularly"</strong></span
+                >
+              </div>
+              <button
+                onclick="playAudioSample('particularly')"
+                class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
+              >
+                Hear IPA 🔊
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 60-SECOND QUICK WARMUP DRILL -->
+        <section
+          class="p-4 rounded-3xl dark:bg-gradient-to-r dark:from-purple-950/30 dark:to-indigo-950/30 bg-purple-50 border dark:border-purple-800/30 border-purple-200 flex items-center justify-between"
+        >
+          <div class="space-y-1">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm">⚡</span>
+              <h4
+                class="text-xs font-bold dark:text-purple-200 text-purple-900"
+              >
+                60-Second Pronunciation Drill
+              </h4>
+            </div>
+            <p class="text-[11px] dark:text-slate-300 text-slate-600">
+              Master the "th" sound in 3 tongue twisters
+            </p>
+          </div>
+          <button
+            onclick="
+              showToast(
+                '🎙️ Drill started: Read aloud: Six sleek swans swam swiftly southwards.',
+              )
+            "
+            class="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-sm"
+          >
+            Quick Start
+          </button>
+        </section>
+      </div>
+
+      <!-- FLOATING BOTTOM NAVIGATION BAR -->
+      <nav
+        class="absolute bottom-0 left-0 right-0 h-20 px-6 pb-4 flex items-center justify-around z-30 dark:bg-specker-bgDark/90 bg-white/95 backdrop-blur-md border-t dark:border-white/10 border-slate-200/80"
+      >
+        <!-- Tab 1: Home (Active) -->
+        <button
+          onclick="switchTab('home')"
+          class="flex flex-col items-center gap-1 text-indigo-500 dark:text-indigo-400 group transition"
+        >
+          <div class="p-1 rounded-xl group-hover:bg-indigo-500/10">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-bold">Home</span>
+        </button>
+
+        <!-- Tab 2: Scenarios -->
+        <button
+          onclick="switchTab('scenarios')"
+          class="flex flex-col items-center gap-1 dark:text-slate-400 text-slate-500 hover:text-indigo-500 group transition"
+        >
+          <div class="p-1 rounded-xl group-hover:bg-indigo-500/10">
+            <svg
+              class="w-5 h-5 fill-none stroke-current stroke-2"
+              viewBox="0 0 24 24"
+            >
+              <rect x="3" y="3" width="7" height="7" rx="2" />
+              <rect x="14" y="3" width="7" height="7" rx="2" />
+              <rect x="14" y="14" width="7" height="7" rx="2" />
+              <rect x="3" y="14" width="7" height="7" rx="2" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-medium">Scenarios</span>
+        </button>
+
+        <!-- Central Quick Speak Button -->
+        <button
+          onclick="openCallModal()"
+          class="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 hover:scale-105 shadow-[0_6px_20px_rgba(99,102,241,0.5)] flex items-center justify-center text-white text-lg transition active:scale-95"
+        >
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path
+              d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.38-1.14-1-1.14z"
+            />
+          </svg>
+        </button>
+
+        <!-- Tab 3: Progress & Scorecard -->
+        <button
+          onclick="switchTab('progress')"
+          class="flex flex-col items-center gap-1 dark:text-slate-400 text-slate-500 hover:text-indigo-500 group transition"
+        >
+          <div class="p-1 rounded-xl group-hover:bg-indigo-500/10">
+            <svg
+              class="w-5 h-5 fill-none stroke-current stroke-2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M18 20V10M12 20V4M6 20v-6" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-medium">Progress</span>
+        </button>
+
+        <!-- Tab 4: Profile -->
+        <button
+          onclick="switchTab('profile')"
+          class="flex flex-col items-center gap-1 dark:text-slate-400 text-slate-500 hover:text-indigo-500 group transition"
+        >
+          <div class="p-1 rounded-xl group-hover:bg-indigo-500/10">
+            <svg
+              class="w-5 h-5 fill-none stroke-current stroke-2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <span class="text-[10px] font-medium">Profile</span>
+        </button>
+      </nav>
+
+      <!-- INTERACTIVE MODAL 1: LIVE STELLA CALL SIMULATOR -->
+      <div
+        id="call-modal"
+        class="hidden absolute inset-0 z-50 dark:bg-specker-bgDark bg-slate-900 text-white flex flex-col justify-between p-6 transition-all duration-300"
+      >
+        <!-- Call Header -->
+        <div class="flex items-center justify-between pt-6">
+          <div class="flex items-center gap-2">
+            <span
+              class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"
+            ></span>
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-emerald-400"
+              >Encrypted AI Voice Call</span
+            >
+          </div>
+          <button
+            onclick="closeCallModal()"
+            class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm hover:bg-white/20 transition"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Center AI Voice Interactive Area -->
+        <div class="flex flex-col items-center text-center space-y-6 my-auto">
+          <!-- Pulsing Stella AI Avatar ring -->
+          <div class="relative flex items-center justify-center">
+            <div
+              class="absolute w-44 h-44 rounded-full bg-indigo-500/20 animate-pulse-slow"
+            ></div>
+            <div
+              class="absolute w-36 h-36 rounded-full bg-indigo-500/30 animate-ping"
+            ></div>
+            <div
+              class="w-28 h-28 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 p-1 shadow-2xl flex items-center justify-center overflow-hidden z-10"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&auto=format&fit=crop&q=80"
+                alt="Stella AI"
+                class="w-full h-full object-cover rounded-full"
+              />
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight">Stella AI Coach</h2>
+            <p class="text-indigo-300 text-xs font-medium mt-1">
+              Topic: Defending Ideas in Meetings
+            </p>
+            <p id="call-timer" class="text-slate-400 text-sm font-mono mt-1">
+              01:42
+            </p>
+          </div>
+
+          <!-- Live Voice Equalizer Waves -->
+          <div
+            class="flex items-center justify-center gap-1.5 h-12 w-full max-w-xs px-4"
+          >
+            <span
+              class="w-1.5 bg-indigo-400 rounded-full h-4 animate-wave-bar"
+            ></span>
+            <span
+              class="w-1.5 bg-purple-400 rounded-full h-8 animate-wave-bar delay-75"
+            ></span>
+            <span
+              class="w-1.5 bg-indigo-400 rounded-full h-11 animate-wave-bar delay-150"
+            ></span>
+            <span
+              class="w-1.5 bg-cyan-400 rounded-full h-6 animate-wave-bar delay-100"
+            ></span>
+            <span
+              class="w-1.5 bg-indigo-400 rounded-full h-10 animate-wave-bar delay-200"
+            ></span>
+            <span
+              class="w-1.5 bg-purple-400 rounded-full h-5 animate-wave-bar delay-300"
+            ></span>
+            <span
+              class="w-1.5 bg-indigo-400 rounded-full h-9 animate-wave-bar delay-75"
+            ></span>
+            <span
+              class="w-1.5 bg-cyan-400 rounded-full h-4 animate-wave-bar delay-150"
+            ></span>
+          </div>
+
+          <!-- Live Real-Time Coaching Feedback Bubble -->
+          <div
+            class="w-full max-w-xs p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-left"
+          >
+            <div
+              class="flex items-center gap-2 text-indigo-300 text-[11px] font-bold"
+            >
+              <span>✨ Live Stella Whisper</span>
+            </div>
+            <p
+              id="live-coaching-text"
+              class="text-xs text-slate-200 mt-1 font-medium italic"
+            >
+              "You used 'Furthermore' effectively! Try slowing your pace
+              slightly when concluding."
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom Call Actions -->
+        <div class="flex items-center justify-around pb-8 pt-4">
+          <!-- Mute Mic -->
+          <button
+            onclick="toggleMute()"
+            id="mic-btn"
+            class="w-14 h-14 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-xl transition"
+          >
+            🎙️
+          </button>
+
+          <!-- End Call (Triggers Scorecard) -->
+          <button
+            onclick="endCallAndShowScorecard()"
+            class="w-16 h-16 rounded-full bg-rose-600 hover:bg-rose-500 shadow-lg shadow-rose-600/50 flex items-center justify-center text-white text-2xl transition active:scale-90"
+          >
+            📞
+          </button>
+
+          <!-- Repeat Prompt -->
+          <button
+            onclick="
+              showToast(
+                'Stella: Could you explain why your strategy minimizes client churn?',
+              )
+            "
+            class="w-14 h-14 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-xl transition"
+          >
+            🔄
+          </button>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE MODAL 2: DETAILED SCORECARD MODAL -->
+      <div
+        id="scorecard-modal"
+        class="hidden absolute inset-0 z-50 dark:bg-specker-bgDark bg-slate-900 text-white flex flex-col p-6 overflow-y-auto no-scrollbar"
+      >
+        <div
+          class="flex items-center justify-between pb-4 border-b border-white/10"
+        >
+          <div>
+            <span class="text-[10px] uppercase font-bold text-emerald-400"
+              >Session Completed!</span
+            >
+            <h2 class="text-xl font-bold">Speech Analysis Scorecard</h2>
+          </div>
+          <button
+            onclick="closeScorecardModal()"
+            class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="space-y-4 py-4">
+          <!-- Hero Score Badge -->
+          <div
+            class="p-4 rounded-3xl bg-gradient-to-tr from-indigo-900/50 to-purple-900/50 border border-indigo-500/30 flex items-center justify-between"
+          >
+            <div>
+              <span class="text-xs text-indigo-300 font-semibold uppercase"
+                >Overall Fluency Band</span
+              >
+              <div class="text-3xl font-black mt-0.5">
+                88 <span class="text-sm font-normal text-slate-400">/ 100</span>
+              </div>
+              <p class="text-xs text-emerald-400 font-semibold mt-1">
+                ✓ Level B2 Proficiency Achieved
+              </p>
+            </div>
+            <div
+              class="w-16 h-16 rounded-2xl bg-indigo-600/30 border border-indigo-400/30 flex items-center justify-center text-2xl"
+            >
+              🏆
+            </div>
+          </div>
+
+          <!-- 4 Detailed Pillars -->
+          <div class="grid grid-cols-2 gap-2.5 text-xs">
+            <div
+              class="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-1"
+            >
+              <span class="text-slate-400 text-[10px] uppercase font-bold"
+                >Pronunciation Clarity</span
+              >
+              <div class="text-base font-bold text-emerald-400">84%</div>
+              <p class="text-[10px] text-slate-300">
+                Clean vowels, crisp consonants
+              </p>
+            </div>
+            <div
+              class="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-1"
+            >
+              <span class="text-slate-400 text-[10px] uppercase font-bold"
+                >Grammar Precision</span
+              >
+              <div class="text-base font-bold text-indigo-400">92%</div>
+              <p class="text-[10px] text-slate-300">No tense disagreement</p>
+            </div>
+            <div
+              class="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-1"
+            >
+              <span class="text-slate-400 text-[10px] uppercase font-bold"
+                >Speaking Pace</span
+              >
+              <div class="text-base font-bold text-amber-400">126 WPM</div>
+              <p class="text-[10px] text-slate-300">Natural native pace</p>
+            </div>
+            <div
+              class="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-1"
+            >
+              <span class="text-slate-400 text-[10px] uppercase font-bold"
+                >Vocabulary Depth</span
+              >
+              <div class="text-base font-bold text-purple-400">Advanced</div>
+              <p class="text-[10px] text-slate-300">14 professional terms</p>
+            </div>
+          </div>
+
+          <!-- Actionable Feedback: Mispronounced Words -->
+          <div
+            class="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-2"
+          >
+            <span class="text-[11px] font-bold text-indigo-300"
+              >Target Pronunciation Drill</span
+            >
+            <div class="flex flex-wrap gap-2 text-xs">
+              <span
+                class="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1 font-mono"
+              >
+                Particularly <span>/pərˈtɪkjələrli/</span>
+              </span>
+              <span
+                class="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1 font-mono"
+              >
+                Hierarchy <span>/ˈhaɪərɑːrki/</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <button
+            onclick="
+              closeScorecardModal();
+              showToast('Streak updated: 8 Days 🔥!');
+            "
+            class="w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 font-bold text-sm text-white shadow-lg transition"
+          >
+            Save Session to Progress
+          </button>
+        </div>
+      </div>
+
+      <!-- TOAST NOTIFICATION CONTAINER -->
+      <div
+        id="toast-msg"
+        class="hidden absolute top-14 left-1/2 transform -translate-x-1/2 w-11/12 max-w-xs z-50 p-3 rounded-2xl bg-slate-900/95 text-white text-xs font-semibold shadow-2xl border border-white/15 text-center transition-all"
+      >
+        Toast notification
+      </div>
+    </main>
+
+    <!-- Prototype Instructions & Footer -->
+    <footer class="mt-4 text-center text-xs text-slate-400 max-w-md space-y-1">
+      <p>
+        💡 <strong>Try:</strong> Tap
+        <strong>"Start Daily Call with Stella"</strong> to test the live voice
+        session simulator, or switch between
+        <strong>Light & Dark</strong> modes.
+      </p>
+    </footer>
+
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const themeIcon = document.getElementById("theme-icon");
+        if (html.classList.contains("dark")) {
+          html.classList.remove("dark");
+          themeIcon.innerText = "🌙 Dark";
+        } else {
+          html.classList.add("dark");
+          themeIcon.innerText = "☀️ Light";
+        }
+      }
+
+      function showToast(text) {
+        const toast = document.getElementById("toast-msg");
+        toast.innerText = text;
+        toast.classList.remove("hidden");
+        setTimeout(() => {
+          toast.classList.add("hidden");
+        }, 3200);
+      }
+
+      let callTimerInterval;
+      let callSeconds = 102;
+
+      function openCallModal() {
+        document.getElementById("call-modal").classList.remove("hidden");
+        callSeconds = 102;
+        callTimerInterval = setInterval(() => {
+          callSeconds++;
+          const mins = String(Math.floor(callSeconds / 60)).padStart(2, "0");
+          const secs = String(callSeconds % 60).padStart(2, "0");
+          document.getElementById("call-timer").innerText = `${mins}:${secs}`;
+        }, 1000);
+      }
+
+      function closeCallModal() {
+        document.getElementById("call-modal").classList.add("hidden");
+        clearInterval(callTimerInterval);
+      }
+
+      function endCallAndShowScorecard() {
+        closeCallModal();
+        openScorecardModal();
+      }
+
+      function openScorecardModal() {
+        document.getElementById("scorecard-modal").classList.remove("hidden");
+      }
+
+      function closeScorecardModal() {
+        document.getElementById("scorecard-modal").classList.add("hidden");
+      }
+
+      function toggleMute() {
+        const btn = document.getElementById("mic-btn");
+        if (btn.innerText === "🎙️") {
+          btn.innerText = "🔇";
+          showToast("Microphone Muted");
+        } else {
+          btn.innerText = "🎙️";
+          showToast("Microphone Active");
+        }
+      }
+
+      function openScenarioDetail(title, desc, meta) {
+        showToast(`Launching scenario: "${title}" (${meta})`);
+        setTimeout(() => {
+          openCallModal();
+        }, 600);
+      }
+
+      function playAudioSample(word) {
+        showToast(`Playing native speaker audio for "${word}" 🔊`);
+      }
+
+      function switchTab(tabName) {
+        showToast(
+          `Navigating to ${tabName.charAt(0).toUpperCase() + tabName.slice(1)} view`,
+        );
+      }
+    </script>
+  </body>
+</html>
